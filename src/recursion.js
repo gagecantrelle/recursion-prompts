@@ -1,5 +1,4 @@
 // Solve all of the following prompts using recursion.
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 // 1. Calculate the factorial of a number.  The factorial of a non-negative integer n,
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
@@ -67,12 +66,46 @@ var isEven = function (n) {
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function (n) {
+var sumBelow = function (n, sum = 0) {
+
+  //add up all numbers below a given number, for example
+  // 10 = 9 + 8 + 7...
+
+  //check if n = 0
+
+  if (n === 0) {
+    return sum
+  }
+  if (n < 0) {
+
+    // if n is negative
+    n += 1
+    sum += n
+
+    return sumBelow(n, sum)
+
+  } else {
+    //sets n to one number below it
+    n -= 1
+    //adds n to the sum
+    sum += n
+    //does the same thing again until n = 0
+    return sumBelow(n, sum)
+  }
+
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function (x, y) {
+var range = function (x, y, arr = []) {
+
+//check if the last value of arr is y-1 or y+1
+//check if x > y or if x < y
+//check if x or y are positive
+// check if x = y or if x and y are next to eachother
+
+
+
 };
 
 // 7. Compute the exponent of a number.
