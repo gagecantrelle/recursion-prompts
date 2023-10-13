@@ -98,13 +98,37 @@ var sumBelow = function (n, sum = 0) {
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function (x, y, arr = []) {
+  //check if there are any integers between the numbers
+  if (x === y) {
+    return arr
+  } else if (x - 1 === y) {
+    return arr
+  } else if (x + 1 === y) {
+    return arr
+  }
 
-//check if the last value of arr is y-1 or y+1
-//check if x > y or if x < y
-//check if x or y are positive
-// check if x = y or if x and y are next to eachother
-
-
+  //checks if x is negative
+  if (x < 0) {
+    //checks if the negative number goes to a positive number
+    if (x < y) {
+      arr.push(x + 1)
+      return range(x + 1, y, arr)
+    } else {
+      arr.push(x - 1)
+      return range(x - 1, y, arr)
+    }
+  } else {
+    //for when x is positive
+    if (x < y) {
+      arr.push(x + 1)
+      return range(x + 1, y, arr)
+    }
+    //checks if the nuber goes down from x
+    else {
+      arr.push(x - 1)
+      return range(x - 1, y, arr)
+    }
+  }
 
 };
 
@@ -113,7 +137,27 @@ var range = function (x, y, arr = []) {
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function (base, exp) {
+var exponent = function (base, exp, tot = 1, count = 0) {
+
+
+  if (exp === count) {
+    if (exp < 0) {
+
+      base = 1 / tot
+
+      return base
+    } else {
+      return tot
+    }
+  }
+
+  tot *= base
+
+  return exponent(base, exp, tot, count + 1)
+
+
+
+
 };
 
 // 8. Determine if a number is a power of two.
