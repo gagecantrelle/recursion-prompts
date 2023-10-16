@@ -67,12 +67,70 @@ var isEven = function (n) {
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function (n) {
+var sumBelow = function (n, sum = 0) {
+
+  //add up all numbers below a given number, for example
+  // 10 = 9 + 8 + 7...
+
+  //check if n = 0
+
+  if (n === 0) {
+    return sum
+  }
+  if (n < 0) {
+
+    // if n is negative
+    n += 1
+    sum += n
+
+    return sumBelow(n, sum)
+
+  } else {
+    //sets n to one number below it
+    n -= 1
+    //adds n to the sum
+    sum += n
+    //does the same thing again until n = 0
+    return sumBelow(n, sum)
+  }
+
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function (x, y) {
+var range = function (x, y, arr = []) {
+  //check if there are any integers between the numbers
+  if (x === y) {
+    return arr
+  } else if (x - 1 === y) {
+    return arr
+  } else if (x + 1 === y) {
+    return arr
+  }
+
+  //checks if x is negative
+  if (x < 0) {
+    //checks if the negative number goes to a positive number
+    if (x < y) {
+      arr.push(x + 1)
+      return range(x + 1, y, arr)
+    } else {
+      arr.push(x - 1)
+      return range(x - 1, y, arr)
+    }
+  } else {
+    //for when x is positive
+    if (x < y) {
+      arr.push(x + 1)
+      return range(x + 1, y, arr)
+    }
+    //checks if the nuber goes down from x
+    else {
+      arr.push(x - 1)
+      return range(x - 1, y, arr)
+    }
+  }
+
 };
 
 // 7. Compute the exponent of a number.
@@ -80,7 +138,27 @@ var range = function (x, y) {
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function (base, exp) {
+var exponent = function (base, exp, tot = 1, count = 0) {
+
+
+  if (exp === count) {
+    if (exp < 0) {
+
+      base = 1 / tot
+
+      return base
+    } else {
+      return tot
+    }
+  }
+
+  tot *= base
+
+  return exponent(base, exp, tot, count + 1)
+
+
+
+
 };
 
 // 8. Determine if a number is a power of two.
