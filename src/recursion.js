@@ -139,41 +139,95 @@ var range = function (x, y, arr = []) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function (base, exp, tot = 1, count = 0) {
-
-
+  //check if exp is equal to count
   if (exp === count) {
+    //check if exp is negative
     if (exp < 0) {
-
-      base = 1 / tot
-
-      return base
+      //return tot divided by one
+      return 1 / tot
+      //run if false
     } else {
+      //return tot
       return tot
     }
   }
-
+  //set tot equal to itself times base
   tot *= base
-
-  return exponent(base, exp, tot, count + 1)
-
-
-
-
+  //check if exp is negative
+  if (exp < 0) {
+    // return the function with base, exp, tot, and count mines one
+    return exponent(base, exp, tot, count - 1)
+    //run if false
+  } else {
+    // return the function with base, exp, tot, and count pulse one
+    return exponent(base, exp, tot, count + 1)
+  }
 };
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
-var powerOfTwo = function (n) {
+var powerOfTwo = function (n, check = 1) {
+  //check if n is equal to check
+  if (n === check) {
+    //return true
+    return true;
+    //check if check is greater than n
+  } else if (check > n) {
+    //return false
+    return false
+  }
+  //return the function with n and check times two
+  return powerOfTwo(n, check * 2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function (string) {
+var reverse = function (string, arr = [], newString = '') {
+  //check if string length is the same as newString length
+  if (string.length === newString.length) {
+    //return new string
+    return newString;
+  }
+  //check if arr has any values
+  if (arr.length === 0) {
+    //put each chacter in the string into arr
+    arr = string.split("");
+  }
+  //add the last chacter in newString and remove it from arr
+  newString += arr.pop();
+  //return the function with string, arr, and newString
+  return reverse(string, arr, newString);
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function (string) {
+var palindrome = function (string, noSpace = false) {
+  //ccheck if the length os zero or one
+  if (string.length === 0 || string.length === 1) {
+    //return true
+    return true;
+  }
+  //check if noSpace is false
+  if (noSpace === false) {
+    //set string to be a string with no spaces and captile chacter
+    string = string.replace(/ /g, '')
+    string = string.toLowerCase();
+    //set noSpace to be true
+    noSpace = true;
+  }
+  //check if the first and last chacter are true
+  if (string[0] === string[string.length - 1]) {
+    //create a variable that equal to the string with the frist and last chacter remove  
+    let str = string.slice(1);
+    str = str.slice(0, (str.length - 1))
+    //return the string with the str and noSpace
+    return palindrome(str, noSpace);
+    //run if false
+  } else {
+    //return false
+    return false;
+  }
+
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
