@@ -202,7 +202,7 @@ var reverse = function (string, arr = [], newString = '') {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function (string, noSpace = false) {
-  //ccheck if the length os zero or one
+  //check if the length os zero or one
   if (string.length === 0 || string.length === 1) {
     //return true
     return true;
@@ -241,7 +241,29 @@ var modulo = function (x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function (x, y) {
+var multiply = function (x, y, value = 0, count = 0) {
+  if (count === y) {
+    return value;
+  } else if (x === 0 || y === 0) {
+    return 0
+  } else if (y === 1) {
+    return x;
+  }
+
+
+  if (x > 0 && y > 0) {
+    value = value + x;
+    count = count + 1;
+  } else if (x < 0 && y > 0) {
+    value = value + x;
+    count = count + 1;
+  } else if (x < 0 && y < 0) {
+    value = value + (x - x - x);
+    count = count - 1;
+  }
+
+
+  return multiply(x, y, value, count)
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -262,7 +284,31 @@ var gcd = function (x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
-var compareStr = function (str1, str2) {
+var compareStr = function (str1, str2, arr1 = 'none', arr2 = 'none') {
+  //check if arr1 and arr2 length are both zero
+  if (arr1.length === 0 && arr2.length === 0) {
+    //return zero
+    return true;
+  }
+  //check if arr1 is equal to a string of 'none'
+  if (arr1 === 'none') {
+    //set arr1 to be an array of chacters from str1
+    arr1 = str1.split("");
+    //set arr2 to be an array of chacters from str2
+    arr2 = str2.split("");
+  }
+  //check if the first value from arr1 and arr2 ar the same
+  if (arr1[0] === arr2[0]) {
+    //remove the first value from arr1 and arr2 
+    arr1.shift();
+    arr2.shift();
+    //return the function with str1, str2 arr1, and arr2
+    return compareStr(str1, str2, arr1, arr2);
+    //run if false
+  } else {
+    //return false
+    return false;
+  }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
