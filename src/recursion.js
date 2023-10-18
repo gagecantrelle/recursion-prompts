@@ -415,7 +415,8 @@ var replaceKeysInObj = function (obj, key, newKey) {
 // Example:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
-var fibonacci = function (n) {
+var fibonacci = function (n, fib) {
+
 };
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -423,18 +424,70 @@ var fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function (n) {
+var nthFibo = function (n, index = 'none', fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144], count = 0) {
+
+  //the default value for index
+  if (index !== 'none') {
+    return index
+  } else if (n < 0) {
+    return null
+  } //if the given value is a negative number, return null
+
+  if (n === count) {
+    index = fib[0]
+    return index
+  } // if n is equal to the count, set the index to the first value of fib and return the index
+
+
+
+  fib.shift()
+  //deletes the first index in fib
+  count++
+  //increases count by 1
+
+  return nthFibo(n, index, fib, count)
+  //loops again
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function (input) {
+var capitalizeWords = function (input, arr = [], count = 0) {
+
+  //checks if the new array is equal to the original array, if it is, then return the new array
+  if (arr.length === input.length) {
+    return arr
+  }
+
+  arr.push(input[count].toUpperCase())
+  //pushes the current index to the new array in uppercase
+
+  return capitalizeWords(input, arr, count + 1)
+  //loops again
+
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function (array) {
+var capitalizeFirst = function (array, arr = [], count = 0) {
+
+  //checks if the new array is equal to the original array, if it is, then return the new array
+  if (arr.length === array.length) {
+    return arr
+  }
+
+  var firstLetter = array[count][0].toUpperCase()
+  //takes the first letter of the current string
+  var firstString = array[count].slice(1)
+  //takes the rest of the words
+
+
+  arr.push(firstLetter + firstString)
+  //combines the now uppercase letter with the rest of the string and pushes to the new array
+
+  return capitalizeFirst(array, arr, count + 1)
+  //loops again
+
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -456,7 +509,27 @@ var flatten = function (arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function (str, obj) {
+var letterTally = function (str, obj = {}) {
+
+  if (str.length === 0) {
+    return obj
+  }
+  //if the string is empty, returns the object
+
+
+  if (obj[str[0]]) {
+    obj[str[0]] += 1
+  } else {
+    obj[str[0]] = 1
+  }
+  //if there is already a key with that letter, it will add onto it, if not, it makes a new key with the number 1
+
+  var newStr = str.slice(1)
+  //removes the first letter
+
+  return letterTally(newStr, obj)
+  //loops again
+
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
