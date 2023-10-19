@@ -537,7 +537,27 @@ var letterTally = function (str, obj = {}) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function (list) {
+var compress = function (list, arr = []) {
+  //check if list.length is equal to zero
+  const copy = [...list];
+  if (copy.length === 0) {
+    //return arr
+    // debugger
+    console.log(arr)
+    return arr;
+  }
+  //console.log(list)
+  //console.log()
+  //make suer that the value that will be push in is not all ready in the array
+  if (arr[arr.length - 1] !== copy[0]) {
+    //push the first value of array into arr
+    arr.push(copy[0])
+    // console.log(arr)
+  }
+  //remove the first value in array
+  copy.shift();
+  //return the function with copy and arr
+  return compress(copy, arr);
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -549,20 +569,52 @@ var augmentElements = function (array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function (array) {
+var minimizeZeroes = function (array, arr = []) {
+  //check if array.length is equal to zero
+  //return arr
+
+  //make suer each zero is not touching another zero
+  //push the first value of array into arr
+
+  //remove the first value in array
+
+  //return the function with array and arr
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function (array) {
+var alternateSign = function (array, arr = []) {
+  //check if array.length is equal to zero
+  //return arr
+
+  //times the first value by -1
+
+  //remove the first value in array
+
+  //return the function with array and arr
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function (str) {
+var numToText = function (str, arr = 'none', newStr = '') {
+  //create object of the words numbers from 1 to 6
+
+  //set arr to equal an array of words from str
+
+  //check if arr.length is 0
+  //return newStr
+
+  //check if the first value is a number
+  //if first value is a string number '5' then add it word value to newStr
+  //else add the first value to newStr
+
+  //remove the first value from arr
+
+  //return the function with str, arr, newStr
+
 };
 
 // *** EXTRA CREDIT ***
