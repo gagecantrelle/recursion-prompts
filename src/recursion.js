@@ -569,31 +569,77 @@ var augmentElements = function (array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function (array, arr = []) {
-  //check if array.length is equal to zero
-  //return arr
-
+var minimizeZeroes = function (array, arr = [], count = 0) {
+  //check if array.length is equal to count
+  if (count === array.length) {
+    //return arr
+    return arr
+  }
   //make suer each zero is not touching another zero
-  //push the first value of array into arr
-
-  //remove the first value in array
-
-  //return the function with array and arr
+  //check if the last value in arr is equal to zero
+  if (arr[arr.length - 1] === 0) {
+    //check if the value that going to be push in is nt equal to zero
+    if (array[count] !== 0) {
+      //push the current value of array into arr
+      arr.push(array[count])
+      //increase count
+      count++
+      //run if false
+    } else {
+      //just increase count
+      count++
+    }
+    //run if false
+  } else {
+    //push the current value of array into arr
+    arr.push(array[count])
+    //increase count
+    count++
+  }
+  //return the function with array, arr, and count
+  return minimizeZeroes(array, arr, count);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function (array, arr = []) {
-  //check if array.length is equal to zero
-  //return arr
+var alternateSign = function (array, arr = [], pon = true, count = 0) {
+  //check if array.length is equal to arr.length
+  if (array.length === arr.length) {
+    //return arr
+    return arr;
+  }
 
-  //times the first value by -1
+  //check if pon (postive or negative) is true or false
+  if (pon === true) {
+    if (array[count] < 0) {
+      //push in the postive value of the current value in array
+      arr.push(array[count] * -1);
+      //set pon to equal false
+      pon = false;
+    } else {
+      //push in the current value in array
+      arr.push(array[count]);
+      //set pon to equal false
+      pon = false;
+    }
+  } else {
+    if (array[count] > 0) {
+      //push in the negative value of the current value in array
+      arr.push(array[count] * -1);
+      //set pon to equal true
+      pon = true;
+    } else {
+      //push in the current value in array
+      arr.push(array[count]);
+      //set pon to equal false
+      pon = true;
+    }
+  }
 
-  //remove the first value in array
-
-  //return the function with array and arr
+  //return the function with array, arr, pon, and count + 1
+  return alternateSign(array, arr, pon, count + 1)
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
@@ -601,20 +647,35 @@ var alternateSign = function (array, arr = []) {
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function (str, arr = 'none', newStr = '') {
   //create object of the words numbers from 1 to 6
+  const obj = { 1: 'one', 3: 'three', 5: 'five', 6: 'six' }
 
-  //set arr to equal an array of words from str
-
+  if (arr === 'none') {
+    //set arr to equal an array of words from str
+    arr = str.split(" ");
+  };
   //check if arr.length is 0
-  //return newStr
-
-  //check if the first value is a number
-  //if first value is a string number '5' then add it word value to newStr
-  //else add the first value to newStr
+  if (arr.length === 0) {
+    //create new variable equal to newStr but with the last space remove
+    const string = newStr.slice(0, (newStr.length - 1));
+    //return string
+    return string;
+  }
+  //create a variable that equal the number version of the current value
+  const num = parseInt(arr[0]);
+  //check if num value is a key in obj
+  if (obj.hasOwnProperty(num)) {
+    //add the number string from obj plus an empty string 
+    newStr += obj[num] + ' ';
+    //else add the first value to newStr
+  } else {
+    //add the current string from arr 
+    newStr += arr[0] + ' ';
+  }
 
   //remove the first value from arr
-
+  arr.shift();
   //return the function with str, arr, newStr
-
+  return numToText(str, arr, newStr);
 };
 
 // *** EXTRA CREDIT ***
